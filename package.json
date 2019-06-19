@@ -1,0 +1,29 @@
+{
+  "name": "social-links-icons",
+  "version": "1.0.0",
+  "description": "Wordpress plugin: Simply set up links and icons to your social networks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dimitri BOUTEILLE",
+  "license": "GPL-2.0+",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimitriBouteille/social-links-icons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dimitriBouteille/social-links-icons/issues"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.5.0",
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-header": "^2.0.7",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify-es": "^1.0.4"
+  }
+}
