@@ -170,15 +170,20 @@ class SocialLinksIcons
      *
      * @since 1.0.0
      *
-     * @param bool $onlyWithUrl
+     * @param array $args
+     *      with-url => If true, return only social networks with a url
+     *      networks => List of networks to be returned
      * @return array
      */
-    public function all(bool $onlyWithUrl = true): array {
+    public function all(array $args = []): array {
 
-        if($onlyWithUrl) {
+        $withUrl = $args['with-url'] ?? true;
+        $returnNetworks = $args['networks'] ?? null;
+
+        if($withUrl === true) {
             $networks = [];
             foreach ($this->networks as $network) {
-                if($network->hasUrl()) {
+                if($network->hasUrl() && ($returnNetworks == null || ($returnNetworks !== null && in_array($network->slug, $returnNetworks))) ) {
                     $networks[$network->slug] = $network;
                 }
             }

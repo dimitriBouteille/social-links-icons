@@ -51,11 +51,13 @@ class SLI_Loader
      */
      private function init(): void {
 
-         $this->initConstants();
-         $this->loadClass();
-         $this->initHooks();
-         $this->initFunctions();
-         $this->initGlobalVars();
+        $this->initConstants();
+        $this->loadClass();
+        $this->initHooks();
+        $this->initFunctions();
+        $this->initGlobalVars();
+
+        SLI_ShortCode::init();
      }
 
     /**
@@ -113,6 +115,7 @@ class SLI_Loader
         $this->include('/Social/SLI_Social_Youtube.php');
         $this->include('/SocialLinksIcons.php');
         $this->include('/SLI_BackOffice.php');
+        $this->include('/SLI_ShortCode.php');
     }
 
     /**

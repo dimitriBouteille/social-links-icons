@@ -145,7 +145,7 @@ class SLI_BackOffice
 
         if(is_null($this->defaultNetwork)) {
 
-            $networks = SocialLinksIcons::instance()->all(false);
+            $networks = $this->getAllNetworks();
             $slugNetwork = $_GET['network'] ?? null;
 
             if(!key_exists($slugNetwork, $networks)) {
@@ -156,6 +156,23 @@ class SLI_BackOffice
         }
 
         return $this->defaultNetwork;
+    }
+
+    /**
+     * Function getAllNetworks
+     * Returns all social networks
+     *
+     * @since 1.0.0
+     *
+     * @return array
+     * @throws ReflectionException
+     * @throws SLI_Exception
+     */
+    private function getAllNetworks(): array {
+
+        return SocialLinksIcons::instance()->all([
+            'with-url' => false,
+        ]);
     }
 
     /**
@@ -170,7 +187,7 @@ class SLI_BackOffice
     public function loadTabs(): void {
 
         $this->loadTemplate('/tab/menu.php', [
-            'networks' =>       SocialLinksIcons::instance()->all(false),
+            'networks' =>       $this->getAllNetworks(),
             'defaultNetwork' => $this->getNetworkUrl(),
         ], true);
     }
@@ -187,7 +204,7 @@ class SLI_BackOffice
     public function loadBody(): void {
 
         $this->loadTemplate('/tab/body.php', [
-            'networks' =>       SocialLinksIcons::instance()->all(false),
+            'networks' =>       $this->getAllNetworks(),
             'defaultNetwork' => $this->getNetworkUrl(),
             'ajaxAction' =>     SLI_BackOffice::AJAX_ACTION,
         ], true);
@@ -271,7 +288,7 @@ class SLI_BackOffice
             ]);
         } else {
             wp_send_json_error([
-                'msg' => __('Impossible de mettre à jour ce réseau social, le réseau social n\'existe peut-être pas.', SLI_DOMAIN),
+                'msg' => __('Unable to update this social network, the social network may not exist.', SLI_DOMAIN),
             ]);
         }
 
