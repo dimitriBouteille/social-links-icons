@@ -154,6 +154,7 @@ class SLI_Loader
         add_action('wp_ajax_'.SLI_BackOffice::AJAX_ACTION, [SLI_BackOffice::instance(), 'ajaxSave']);
         add_action('sli_admin_tabs', [SLI_BackOffice::instance(), 'loadTabs']);
         add_action('sli_admin_body', [SLI_BackOffice::instance(), 'loadBody']);
+        add_action('sli_admin_form', [SLI_BackOffice::instance(), 'loadForm']);
         add_action('sli_admin_title', [SLI_BackOffice::instance(), 'loadTitle']);
         add_action('sli_admin_find_icons', [SLI_BackOffice::instance(), 'loadFindIcons']);
     }
@@ -215,6 +216,23 @@ class SLI_Loader
                 return $firstNetwork->slug === $secondNetwork->slug;
             }
         }
+
+        if(!function_exists('sli_load_form')) {
+
+            /**
+             * Function sli_load_form
+             *
+             * @since 1.0.0
+             *
+             * @param SLI_Social_Abstract $network
+             * @return void
+             */
+            function sli_load_form(SLI_Social_Abstract $network): void {
+
+                $GLOBALS['network'] = $network;
+                do_action('sli_admin_form');
+            }
+        }
     }
 
     /**
@@ -259,6 +277,7 @@ class SLI_Loader
 
     /**
      * Function fieldName
+     * Returns the name of an option
      *
      * @since 1.0.0
      *
@@ -273,6 +292,7 @@ class SLI_Loader
 
     /**
      * Function templatesPath
+     * Get the path to the templates folder
      *
      * @since 1.0.0
      *

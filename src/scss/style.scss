@@ -1,6 +1,75 @@
 
 @import "variables";
 
+// Form style
+.sli-form {
+
+  $this: &;
+  $input: #{$this}-input;
+  $error: #{$this}-error;
+  $label: #{$this}-label;
+  $colLabel: #{$label}-col;
+  $colInput: #{$input}-col;
+  $field: #{$this}-field;
+  $row: #{$this}-row;
+
+  @at-root {
+    #{$this}-input {
+      position: relative;
+    }
+
+    // Error message
+    #{$error} {
+      margin: 4px 0 0 0;
+      font-size: .9em;
+      color: $_color-error;
+    }
+    #{$label} {
+      font-weight: 600;
+    }
+
+    #{$colLabel} {
+      width: 33%;
+      padding-right: 40px;
+      box-sizing: border-box;
+    }
+    #{$colInput} {
+      width: 380px;
+    }
+
+    // Input & textarea tag
+    #{$field} {
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+      background-color: $_color-white;
+      outline: 0;
+      border: 1px solid #ddd;
+      padding: 6px;
+      width: 100%;
+      border-radius: 4px;
+
+      &.color-type {
+        padding-left: 30px;
+      }
+    }
+    textarea#{$field} {
+      height: 220px;
+    }
+
+    #{$row} {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px 24px;
+      ~ #{$row} {
+        border-top: 1px solid #eee;
+      }
+    }
+  }
+
+}
+
+
+
 .sn-body {
   display: flex;
 }
@@ -135,49 +204,6 @@
   }
 }
 
-.sn-field {
-
-  $this: &;
-  $label: #{$this}-label;
-  $colInput: #{$this}-col-input;
-  $colLabel: #{$this}-col-label;
-  $input: #{$this}-input;
-
-  @at-root {
-
-    #{$this} {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 18px 24px;
-      ~ #{$this} {
-        border-top: 1px solid #eee;
-      }
-    }
-    #{$label} {
-      font-weight: 600;
-    }
-    #{$colInput} {
-      width: 380px;
-      position: relative;
-    }
-    #{$colLabel} {
-      width: 33%;
-    }
-    #{$input}{
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07);
-      background-color: $_color-white;
-      outline:none;
-      border: 1px solid #ddd;
-      padding: 6px;
-      width: 100%;
-      border-radius: 4px;
-    }
-    textarea#{$input} {
-      height: 210px;
-    }
-  }
-}
 
 .sn-preview {
 
@@ -230,21 +256,13 @@
   }
 }
 
-.sn-preview-color {
+// Preview color for input type color
+.sli-preview-color {
   width: 16px;
-  display: inline-block;
   height: 16px;
   border-radius: 50%;
   margin-left: 8px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-
-
-}
-
-.row-color {
-  .sn-field-input {
-    padding-left: 30px;
-  }
 }

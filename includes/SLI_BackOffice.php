@@ -47,9 +47,36 @@ class SLI_BackOffice
      *
      * @since 1.0.0
      *
+     * @see registerAdminMenu()
      * @var string
      */
     const PARENT_SLUG = 'options-general.php';
+
+    /**
+     * @since 1.0.0
+     *
+     * @see registerAdminMenu()
+     * @var string
+     */
+    const PAGE_CAPABILITY = 'manage_options';
+
+    /**
+     * Name of the field containing the security nonce
+     *
+     * @since 1.0.0
+     *
+     * @var string
+     */
+    const ONCE_FIELD_NAME = 'sli_update_network_once';
+
+    /**
+     * Action name associated with the security nonce
+     *
+     * @since 1.0.0
+     *
+     * @var string
+     */
+    const ONCE_ACTION = 'sli-update-network-security';
 
     /**
      * Social network displayed by default in admin
@@ -91,7 +118,7 @@ class SLI_BackOffice
             self::PARENT_SLUG,
             __('Gestion des réseaux sociaux', SLI_DOMAIN),
             __('Gestion des réseaux sociaux', SLI_DOMAIN),
-            'manage_options',
+            self::PAGE_CAPABILITY,
             self::PAGE_SLUG,
             [$this, 'renderPage']
         );
@@ -146,7 +173,11 @@ class SLI_BackOffice
         if(is_null($this->defaultNetwork)) {
 
             $networks = $this->getAllNetworks();
-            $slugNetwork = $_GET['network'] ?? null;
+
+            $slugNetwork = null;
+            if(isset($_GET['network']) && !empty($_GET['network'])) {
+                $slugNetwork = $_GET['network'];
+            }
 
             if(!key_exists($slugNetwork, $networks)) {
                 $this->defaultNetwork = reset($networks);
@@ -206,8 +237,25 @@ class SLI_BackOffice
         $this->loadTemplate('/tab/body.php', [
             'networks' =>       $this->getAllNetworks(),
             'defaultNetwork' => $this->getNetworkUrl(),
+        ]);
+    }
+
+    /**
+     * Function loadForm
+     *
+     * @since 1.0.0
+     *
+     * @throws ReflectionException
+     * @throws SLI_Exception
+     * @return void
+     */
+    public function loadForm(): void {
+
+        $this->loadTemplate('/form.php', [
             'ajaxAction' =>     SLI_BackOffice::AJAX_ACTION,
-        ], true);
+            'onceFieldName' =>  SLI_BackOffice::ONCE_FIELD_NAME,
+            'onceValue' =>      wp_create_nonce(SLI_BackOffice::ONCE_ACTION),
+        ], false);
     }
 
     /**
@@ -268,31 +316,125 @@ class SLI_BackOffice
      */
     public function ajaxSave() {
 
-        $networkSlug = $_POST['sn-network'] ?? null;
-        $network = SocialLinksIcons::instance()->getOne($networkSlug);
+        if(isset($_POST[SLI_BackOffice::ONCE_FIELD_NAME])) {
+            if(wp_verify_nonce($_POST[SLI_BackOffice::ONCE_FIELD_NAME], SLI_BackOffice::ONCE_ACTION)) {
 
-        if(!is_null($network)) {
+                if(current_user_can(SLI_BackOffice::PAGE_CAPABILITY)) {
 
-            $network->svg = trim($_POST['svg'] ?? null);
-            $network->title = trim($_POST['title'] ?? null);
-            $network->url = trim($_POST['url'] ?? null);
-            $network->color = trim($_POST['color'] ?? null);
+                    if (isset($_POST['sn-network'])) {
+                        $slugNetwork = $_POST['sn-network'];
 
-            update_option(SLI()->fieldName($network, 'title'), $network->title);
-            update_option(SLI()->fieldName($network, 'url'), $network->url);
-            update_option(SLI()->fieldName($network, 'svg'), $network->svg);
-            update_option(SLI()->fieldName($network, 'color'), $network->color);
+                        if (!empty($slugNetwork) && SocialLinksIcons::instance()->networkExist($_POST['sn-network'])) {
+                            $network = SocialLinksIcons::instance()->getOne($slugNetwork);
 
-            wp_send_json_success([
-                'hasUrl' => $network->hasUrl(),
-            ]);
-        } else {
-            wp_send_json_error([
-                'msg' => __('Unable to update this social network, the social network may not exist.', SLI_DOMAIN),
-            ]);
+                            if ($this->checkNetwork($_POST, $network, $errors)) {
+
+                                update_option(SLI()->fieldName($network, 'title'), $network->title);
+                                update_option(SLI()->fieldName($network, 'url'), $network->url);
+                                update_option(SLI()->fieldName($network, 'color'), $network->color);
+                                update_option(SLI()->fieldName($network, 'svg'), $network->svg);
+
+                                wp_send_json_success([
+                                    'hasUrl' => $network->hasUrl(),
+                                ]);
+                            } else {
+                                wp_send_json_error([
+                                    'errors' => $errors,
+                                ]);
+                            }
+                        } else {
+                            wp_send_json_error([
+                                'msg' => __('Unable to update this social network, the social network may not exist.', SLI_DOMAIN),
+                            ]);
+                        }
+                    } else {
+                        wp_send_json_error([
+                            'msg' => __('Couldn’t find the social network slug to update.', SLI_DOMAIN),
+                        ]);
+                    }
+
+                    die;
+                }
+            }
         }
 
+        wp_send_json_error([
+            'msg' => __('The form is invalid.', SLI_DOMAIN),
+        ]);
+
         die;
+    }
+
+    /**
+     * Function checkNetwork
+     * Validates the submission of the form
+     *
+     * @since 1.0.0
+     *
+     * @param array $data
+     * @param SLI_Social_Abstract $networkUpdate
+     * @param $errors
+     * @return bool
+     */
+    private function checkNetwork(array $data, SLI_Social_Abstract &$networkUpdate, &$errors): bool {
+
+        $errors = [];
+
+        // Check url
+        if(isset($data['url'])) {
+            $url = trim($data['url']);
+
+            if(empty($url) || (!empty($url) && filter_var($url, FILTER_VALIDATE_URL))) {
+                $networkUpdate->url = $url;
+            } else {
+                $errors['url'] = __('The url is not correct.', SLI_DOMAIN);
+            }
+        }
+
+        // Check title
+        if(isset($data['title'])) {
+            $title = trim($data['title']);
+
+            if($title === strip_tags($title)) {
+                $networkUpdate->title = $title;
+            } else {
+                $errors['title'] = __('Html code is not allowed.', SLI_DOMAIN);
+            }
+        }
+
+        // Check color
+        if(isset($data['color'])) {
+            $color = trim($data['color']);
+
+            // #000 or #000000
+            if(preg_match('/^#([a-f0-9]{3}|[a-f0-9]{6})$/i', $color)) {
+                $networkUpdate->color = $color;
+            } else {
+                $errors['color'] = __('The color does not respect the hexadecimal format.', SLI_DOMAIN);
+            }
+        }
+
+        // Check svg
+        if(isset($data['svg'])) {
+            $svg = trim($data['svg']);
+
+            if(empty($svg)) {
+                $networkUpdate->svg = $svg;
+            } else {
+                try {
+                    $xml = simplexml_load_string(stripslashes_deep($svg));
+                    if ($xml->getName() === 'svg') {
+                        $networkUpdate->svg = $svg;
+                    } else {
+                        $errors['svg'] = __('The svg should start with &lt;svg. Please delete the text in front of &lt;svg.', SLI_DOMAIN);
+                    }
+                } catch (\Exception $exception) {
+                    $errors['svg'] = __('The svg is badly formatted, impossible to read.', SLI_DOMAIN);
+                }
+            }
+        }
+
+        return count($errors) === 0;
     }
 
     /**

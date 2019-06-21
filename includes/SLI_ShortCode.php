@@ -55,20 +55,18 @@ class SLI_ShortCode
      * Function basicShortCode
      * Loads the contents of the sli-list shortCode
      *
-     * @param $attr
+     * @param $attrs
      *      content => If true, display the icon in svg. By default, the social network name is displayed
      *      networks => Social network slug to be displayed. Ex : facebook, twitter, instagram
      * @return string
      * @throws ReflectionException
      * @throws SLI_Exception
      */
-    public function basicShortCode($attr): string {
-
-        $html = array();
+    public function basicShortCode($attrs): string {
 
         $networks = SocialLinksIcons::instance()->all([
             'with-url' => true,
-            'networks' => $this->explodeListNetworks($attr['networks'] ?? null),
+            'networks' => $this->explodeListNetworks($attrs['networks'] ?? null),
         ]);
 
         // List
@@ -95,7 +93,7 @@ class SLI_ShortCode
             ],  $network));
 
             $defaultContent = $network->name;
-            if(isset($attr['content']) && $attr['content'] === 'svg') {
+            if(isset($attrs['content']) && $attrs['content'] === 'svg') {
                 $defaultContent = $network->svg;
             }
 

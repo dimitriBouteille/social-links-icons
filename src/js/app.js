@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                 tabMenu = document.getElementById(form.getAttribute('data-tab'))
 
                             if (validIcon) {
+                                clearErrors()
                                 validIcon.classList.add(toggleIconClass)
                                 setTimeout(function () {
                                     validIcon.classList.remove(toggleIconClass)
@@ -102,7 +103,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                             }
                         } else {
-                            alert(response.data.msg)
+
+                            clearErrors()
+
+                            if(response.data.hasOwnProperty('errors')) {
+
+                                const listErrors = response.data.errors
+                                Object.keys(listErrors).forEach(fieldName =>  {
+
+                                    let input = form.querySelector(`[name=${fieldName}]`)
+                                    if(input) {
+                                        let inputCol = input.parentNode.parentNode,
+                                            fieldError = inputCol.querySelector('.sli-form-error')
+
+                                        if(fieldError) {
+                                            input.innerHtml = listErrors[fieldName]
+                                        } else {
+
+                                            let p = document.createElement('p')
+                                            p.classList.add('sli-form-error')
+                                            p.innerHTML = listErrors[fieldName]
+                                            inputCol.append(p)
+                                        }
+                                    }
+                                })
+
+                            } else if(response.data.hasOwnProperty('msg')) {
+                                alert(response.data.msg)
+                            }
                         }
 
                         break;
@@ -114,10 +142,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
             }
 
+            function clearErrors() {
+                form.querySelectorAll('.sli-form-error').forEach(error => {
+                    error.remove()
+                })
+            }
+
         })
     }
 
-    let fields = document.querySelectorAll('.sn-field-input')
+    let fields = document.querySelectorAll('input.color-type')
     for(let i =0; i < fields.length; i++) {
         fields[i].oninput = function () {
 
