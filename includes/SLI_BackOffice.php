@@ -175,8 +175,8 @@ class SLI_BackOffice
             $networks = $this->getAllNetworks();
 
             $slugNetwork = null;
-            if(isset($_GET['network']) && !empty($_GET['network'])) {
-                $slugNetwork = $_GET['network'];
+            if(isset($_GET['network'])) {
+                $slugNetwork = sanitize_key($_GET['network']);
             }
 
             if(!key_exists($slugNetwork, $networks)) {
@@ -321,10 +321,10 @@ class SLI_BackOffice
 
                 if(current_user_can(SLI_BackOffice::PAGE_CAPABILITY)) {
 
-                    if (isset($_POST['sn-network'])) {
-                        $slugNetwork = $_POST['sn-network'];
+                    if (isset($_POST['sli-network'])) {
+                        $slugNetwork = sanitize_key($_POST['sli-network']);
 
-                        if (!empty($slugNetwork) && SocialLinksIcons::instance()->networkExist($_POST['sn-network'])) {
+                        if (!empty($slugNetwork) && SocialLinksIcons::instance()->networkExist($slugNetwork)) {
                             $network = SocialLinksIcons::instance()->getOne($slugNetwork);
 
                             if ($this->checkNetwork($_POST, $network, $errors)) {
@@ -382,7 +382,7 @@ class SLI_BackOffice
 
         // Check url
         if(isset($data['url'])) {
-            $url = trim($data['url']);
+            $url = $data['url'];
 
             if(empty($url) || (!empty($url) && filter_var($url, FILTER_VALIDATE_URL))) {
                 $networkUpdate->url = $url;
@@ -395,8 +395,8 @@ class SLI_BackOffice
         if(isset($data['title'])) {
             $title = trim($data['title']);
 
-            if($title === strip_tags($title)) {
-                $networkUpdate->title = $title;
+            if($title === wp_filter_nohtml_kses($title)) {
+                $networkUpdate->title = wp_filter_nohtml_kses($title);
             } else {
                 $errors['title'] = __('Html code is not allowed.', SLI_DOMAIN);
             }
@@ -404,11 +404,10 @@ class SLI_BackOffice
 
         // Check color
         if(isset($data['color'])) {
-            $color = trim($data['color']);
+            $color = $data['color'];
 
-            // #000 or #000000
-            if(preg_match('/^#([a-f0-9]{3}|[a-f0-9]{6})$/i', $color)) {
-                $networkUpdate->color = $color;
+            if($color === sanitize_hex_color($color)) {
+                $networkUpdate->color = sanitize_hex_color($color);
             } else {
                 $errors['color'] = __('The color does not respect the hexadecimal format.', SLI_DOMAIN);
             }
@@ -419,10 +418,11 @@ class SLI_BackOffice
             $svg = trim($data['svg']);
 
             if(empty($svg)) {
-                $networkUpdate->svg = $svg;
+                $networkUpdate->svg = null;
             } else {
                 try {
                     $xml = simplexml_load_string(stripslashes_deep($svg));
+
                     if ($xml->getName() === 'svg') {
                         $networkUpdate->svg = $svg;
                     } else {

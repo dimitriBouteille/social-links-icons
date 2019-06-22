@@ -7,7 +7,7 @@ global $network;
 <form class="sn-form" method="POST" action="<?= admin_url( 'admin-ajax.php' ); ?>" data-js-icon-progress=".icon-progress" data-js-icon-valid=".icon-valid" data-tab="sn-tab-<?= $network->slug; ?>">
     <input type="hidden" name="action" value="<?= $ajaxAction; ?>" >
     <input type="hidden" name="<?= $onceFieldName; ?>" value="<?= $onceValue; ?>">
-    <input type="hidden" name="sn-network" value="<?= $network->slug; ?>">
+    <input type="hidden" name="sli-network" value="<?= $network->slug; ?>">
 
     <!-- Name -->
     <div class="sli-form-row">
