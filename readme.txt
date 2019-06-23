@@ -1,5 +1,7 @@
 === Social Links Icons ===
-Tags: social, social networks, color, icons, svg, social profiles, media, custom social icons
+Tags: social, social networks, color, icons, svg, social profiles, media, custom social icons, social links icons, social link icons, social link icon
+Donate link:
+Contributors: dimbouteille
 Requires at least: 4.2
 Tested up to: 5.2.1
 Requires PHP: 7.2
@@ -20,7 +22,6 @@ In addition, the plugin also allows you to configure the icons and colors of eac
 1. Upload the entire social-links-icons folder to the /wp-content/plugins/ directory
 2. Activate the plugin through the "Plugins" menu in WordPress
 3. Configure the links and icons in the "Setting" tab.
-
 
 == Frequently Asked Questions ==
 = Which social networks are supported by default ?
