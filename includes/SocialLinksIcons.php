@@ -106,10 +106,10 @@ class SocialLinksIcons
                 if (!key_exists($instance->slug, $this->networks)) {
                     $this->networks[$instance->slug] = self::hydrateNetwork($instance);
                 } else {
-                    throw new SLI_Exception(sprintf(__('The slug %s of the social network %s is already used. Please modify the slug to make it unique.', SLI_DOMAIN), $instance->slug, $networkClass));
+                    throw new SLI_Exception(sprintf(__('The slug %s of the social network %s is already used. Please modify the slug to make it unique.', 'social-links-icons'), $instance->slug, $networkClass));
                 }
             } else {
-                throw new SLI_Exception(sprintf(__('Class %s must extend class %s', SLI_DOMAIN), $networkClass, SLI_Social_Abstract::class));
+                throw new SLI_Exception(sprintf(__('Class %s must extend class %s.', 'social-links-icons'), $networkClass, SLI_Social_Abstract::class));
             }
         }
 

@@ -116,8 +116,8 @@ class SLI_BackOffice
 
         add_submenu_page(
             self::PARENT_SLUG,
-            __('Gestion des réseaux sociaux', SLI_DOMAIN),
-            __('Gestion des réseaux sociaux', SLI_DOMAIN),
+            __('Social media management', 'social-links-icons'),
+            __('Social media management', 'social-links-icons'),
             self::PAGE_CAPABILITY,
             self::PAGE_SLUG,
             [$this, 'renderPage']
@@ -344,12 +344,12 @@ class SLI_BackOffice
                             }
                         } else {
                             wp_send_json_error([
-                                'msg' => __('Unable to update this social network, the social network may not exist.', SLI_DOMAIN),
+                                'msg' => __('Unable to update this social network, the social network may not exist.', 'social-links-icons'),
                             ]);
                         }
                     } else {
                         wp_send_json_error([
-                            'msg' => __('Couldn’t find the social network slug to update.', SLI_DOMAIN),
+                            'msg' => __('Couldn’t find the social network slug to update.', 'social-links-icons'),
                         ]);
                     }
 
@@ -359,7 +359,7 @@ class SLI_BackOffice
         }
 
         wp_send_json_error([
-            'msg' => __('The form is invalid.', SLI_DOMAIN),
+            'msg' => __('The form is invalid.', 'social-links-icons'),
         ]);
 
         die;
@@ -387,7 +387,7 @@ class SLI_BackOffice
             if(empty($url) || (!empty($url) && filter_var($url, FILTER_VALIDATE_URL))) {
                 $networkUpdate->url = $url;
             } else {
-                $errors['url'] = __('The url is not correct.', SLI_DOMAIN);
+                $errors['url'] = __('The url is not correct.', 'social-links-icons');
             }
         }
 
@@ -398,7 +398,7 @@ class SLI_BackOffice
             if($title === wp_filter_nohtml_kses($title)) {
                 $networkUpdate->title = wp_filter_nohtml_kses($title);
             } else {
-                $errors['title'] = __('Html code is not allowed.', SLI_DOMAIN);
+                $errors['title'] = __('Html code is not allowed.', 'social-links-icons');
             }
         }
 
@@ -409,7 +409,7 @@ class SLI_BackOffice
             if($color === sanitize_hex_color($color)) {
                 $networkUpdate->color = sanitize_hex_color($color);
             } else {
-                $errors['color'] = __('The color does not respect the hexadecimal format.', SLI_DOMAIN);
+                $errors['color'] = __('The color does not respect the hexadecimal format.', 'social-links-icons');
             }
         }
 
@@ -426,10 +426,10 @@ class SLI_BackOffice
                     if ($xml->getName() === 'svg') {
                         $networkUpdate->svg = $svg;
                     } else {
-                        $errors['svg'] = __('The svg should start with &lt;svg. Please delete the text in front of &lt;svg.', SLI_DOMAIN);
+                        $errors['svg'] = __('The svg should start with &lt;svg. Please delete the text in front of &lt;svg.', 'social-links-icons');
                     }
                 } catch (\Exception $exception) {
-                    $errors['svg'] = __('The svg is badly formatted, impossible to read.', SLI_DOMAIN);
+                    $errors['svg'] = __('The svg is badly formatted, impossible to read.', 'social-links-icons');
                 }
             }
         }

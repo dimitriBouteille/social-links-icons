@@ -1,0 +1,134 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Social Links Icons\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-26 15:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.0; wp-5.2.2"
+
+#: includes/SLI_BackOffice.php:119 includes/SLI_BackOffice.php:120
+#: templates/texts/title.php:1
+msgid "Social media management"
+msgstr ""
+
+#: includes/SLI_BackOffice.php:347
+msgid "Unable to update this social network, the social network may not exist."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:352
+msgid "Couldn’t find the social network slug to update."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:362
+msgid "The form is invalid."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:390
+msgid "The url is not correct."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:401
+msgid "Html code is not allowed."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:412
+msgid "The color does not respect the hexadecimal format."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:429
+msgid ""
+"The svg should start with &lt;svg. Please delete the text in front of &lt;"
+"svg."
+msgstr ""
+
+#: includes/SLI_BackOffice.php:432
+msgid "The svg is badly formatted, impossible to read."
+msgstr ""
+
+#: includes/SocialLinksIcons.php:109
+#, php-format
+msgid ""
+"The slug %s of the social network %s is already used. Please modify the slug "
+"to make it unique."
+msgstr ""
+
+#: includes/SocialLinksIcons.php:112
+#, php-format
+msgid "Class %s must extend class %s."
+msgstr ""
+
+#: templates/form.php:16
+msgid "Name of social network"
+msgstr ""
+
+#: templates/form.php:30
+msgid "Title of the social network"
+msgstr ""
+
+#: templates/form.php:32
+msgid "Attribute title that may appear on some links"
+msgstr ""
+
+#: templates/form.php:45
+msgid "Color of the social network"
+msgstr ""
+
+#: templates/form.php:47
+msgid "The color can be used for personality links"
+msgstr ""
+
+#: templates/form.php:61
+msgid "Url to the social network"
+msgstr ""
+
+#: templates/form.php:75
+msgid "Icon of the social network"
+msgstr ""
+
+#: templates/form.php:77
+msgid "Only icons in svg format are accepted"
+msgstr ""
+
+#: templates/form.php:90
+msgid "Save"
+msgstr ""
+
+#: templates/texts/find-icons.php:14
+msgid "Find icons"
+msgstr ""
+
+#: templates/texts/find-icons.php:16
+#, php-format
+msgid "You can find icons on one of the following sites: %s."
+msgstr ""
+
+#: templates/texts/find-icons.php:17
+msgid ""
+"If you are using icons that do not belong to you, do not forget to mention "
+"the authors in the legal notices."
+msgstr ""
+
+#. Name of the plugin
+msgid "Social Links Icons"
+msgstr ""
+
+#. Description of the plugin
+msgid "Simply set up links and icons to your social networks."
+msgstr ""
+
+#. Author of the plugin
+msgid "Dimitri BOUTEILLE"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://dimitri-bouteille.fr/"
+msgstr ""

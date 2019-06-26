@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Social Links Icons\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-26 15:54+0000\n"
+"PO-Revision-Date: 2019-06-26 15:59+0000\n"
+"Last-Translator: admin <dimitri.bouteille@neuf.fr>\n"
+"Language-Team: Français\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.0; wp-5.2.2"
+
+#: includes/SLI_BackOffice.php:119 includes/SLI_BackOffice.php:120
+#: templates/texts/title.php:1
+msgid "Social media management"
+msgstr "Gestion des réseaux sociaux"
+
+#: includes/SLI_BackOffice.php:347
+msgid "Unable to update this social network, the social network may not exist."
+msgstr ""
+"Impossible de sauvegarder le réseau social, il n'existe peut-être pas.\n"
+
+#: includes/SLI_BackOffice.php:352
+msgid "Couldn’t find the social network slug to update."
+msgstr "Impossible de trouver le réseau social à sauvegarder."
+
+#: includes/SLI_BackOffice.php:362
+msgid "The form is invalid."
+msgstr ""
+"Le formulaire est invalide.\n"
+
+#: includes/SLI_BackOffice.php:390
+msgid "The url is not correct."
+msgstr ""
+"L'url n'est pas correcte.\n"
+
+#: includes/SLI_BackOffice.php:401
+msgid "Html code is not allowed."
+msgstr "Le code Html n'est pas autorisé."
+
+#: includes/SLI_BackOffice.php:412
+msgid "The color does not respect the hexadecimal format."
+msgstr ""
+"La couleur ne respect pas le format d'une couleur hexadécimale.\n"
+
+#: includes/SLI_BackOffice.php:429
+msgid ""
+"The svg should start with &lt;svg. Please delete the text in front of &lt;"
+"svg."
+msgstr ""
+"L'icône doit commencer par la balise &lt;svg. Veuillez supprimer le contenu "
+"qui se trouve devant la balise &lt;svg.\n"
+
+#: includes/SLI_BackOffice.php:432
+msgid "The svg is badly formatted, impossible to read."
+msgstr ""
+"Impossible d'analyser le Svg, il est probablement mal formatté.\n"
+
+#: includes/SocialLinksIcons.php:109
+#, php-format
+msgid ""
+"The slug %s of the social network %s is already used. Please modify the slug "
+"to make it unique."
+msgstr ""
+"Le slug %s du réseau social %s est déjà utilisé. Veuillez modifier le slug "
+"pour qu'il soit unique.\n"
+
+#: includes/SocialLinksIcons.php:112
+#, php-format
+msgid "Class %s must extend class %s."
+msgstr "La class % doit étendre de la class %s."
+
+#: templates/form.php:16
+msgid "Name of social network"
+msgstr "Nom du réseau social"
+
+#: templates/form.php:30
+msgid "Title of the social network"
+msgstr ""
+"Titre du réseau social\n"
+
+#: templates/form.php:32
+msgid "Attribute title that may appear on some links"
+msgstr "Attribut title qui peut apparaître sur certains liens"
+
+#: templates/form.php:45
+msgid "Color of the social network"
+msgstr "Couleur du réseau social"
+
+#: templates/form.php:47
+msgid "The color can be used for personality links"
+msgstr ""
+"La couleur peut être utilisée pour personnalité les liens\n"
+
+#: templates/form.php:61
+msgid "Url to the social network"
+msgstr ""
+"Url vers le réseau social\n"
+
+#: templates/form.php:75
+msgid "Icon of the social network"
+msgstr "Icône du réseau social"
+
+#: templates/form.php:77
+msgid "Only icons in svg format are accepted"
+msgstr "Seules les icônes au format Svg sont acceptées"
+
+#: templates/form.php:90
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: templates/texts/find-icons.php:14
+msgid "Find icons"
+msgstr "Trouver des icônes"
+
+#: templates/texts/find-icons.php:16
+#, php-format
+msgid "You can find icons on one of the following sites: %s."
+msgstr ""
+"Vous pouvez trouver des icônes sur l'un des sites suivants : %s.\n"
+
+#: templates/texts/find-icons.php:17
+msgid ""
+"If you are using icons that do not belong to you, do not forget to mention "
+"the authors in the legal notices."
+msgstr ""
+"Si vous utilisez des icônes qui ne vous appartiennent pas, n'oubliez pas à "
+"citer les auteurs dans les mentions légales."
+
+#. Name of the plugin
+msgid "Social Links Icons"
+msgstr ""
+
+#. Description of the plugin
+msgid "Simply set up links and icons to your social networks."
+msgstr "Configurez simplement les liens vers vos réseaux sociaux !"
+
+#. Author of the plugin
+msgid "Dimitri BOUTEILLE"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://dimitri-bouteille.fr/"
+msgstr ""

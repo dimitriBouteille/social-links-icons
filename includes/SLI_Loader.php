@@ -72,7 +72,6 @@ class SLI_Loader
 
         $this->define('SLI_ABSPATH', __DIR__);
         $this->define('SLI_TEMPLATES_PATH', SLI_DIR.DIRECTORY_SEPARATOR.'templates');
-        $this->define('SLI_DOMAIN', 'social-links-icons');
     }
 
     /**
@@ -148,6 +147,7 @@ class SLI_Loader
      */
     private function initHooks(): void {
 
+        add_action('plugins_loaded', [$this, 'initTranslation']);
         add_action('admin_menu', [SLI_BackOffice::instance(), 'registerAdminMenu']);
         add_action('admin_print_styles', [SLI_BackOffice::instance(), 'initCss']);
         add_action('admin_enqueue_scripts', [SLI_BackOffice::instance(), 'initJs']);
@@ -157,6 +157,7 @@ class SLI_Loader
         add_action('sli_admin_form', [SLI_BackOffice::instance(), 'loadForm']);
         add_action('sli_admin_title', [SLI_BackOffice::instance(), 'loadTitle']);
         add_action('sli_admin_find_icons', [SLI_BackOffice::instance(), 'loadFindIcons']);
+
     }
 
     /**
@@ -173,6 +174,7 @@ class SLI_Loader
     }
 
     /**
+     * Function initFunctions
      *
      * @since 1.0.0
      *
@@ -233,6 +235,22 @@ class SLI_Loader
                 do_action('sli_admin_form');
             }
         }
+    }
+
+    /**
+     * Function initTranslation
+     *
+     * @since 1.1.0
+     *
+     * @return void
+     */
+    public function initTranslation(): void {
+
+        $locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
+        $dir = SLI_DIR . '/languages/';
+
+        load_textdomain( 'social-links-icons', $dir . 'social-links-icons-' . $locale . '.mo' );
+        load_plugin_textdomain( 'social-links-icons', false, $dir);
     }
 
     /**

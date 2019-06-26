@@ -35,4 +35,5 @@ function SLI() {
     return SLI_Loader::instance();
 }
 
-add_action('init', 'SLI');
+
+SLI();
