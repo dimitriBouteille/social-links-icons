@@ -11,8 +11,8 @@ $sites = implode($sites, ', ');
 ?>
 
 <article class="article">
-    <h2><?= __('Trouver des icones', SLI_DOMAIN); ?></h2>
+    <h2><?= __('Find icons', 'social-links-icons'); ?></h2>
 
-    <p><?= sprintf(__('Vous pouvez trouver des icones sur l\'un des sites suivants : %s.', SLI_DOMAIN), trim($sites)); ?><br/>
-        <?= __('Si vous utilisez des icones qui ne vous appartiennet pas, n\'oubliez pas citer les auteurs dans les mentions légales.', SLI_DOMAIN); ?></p>
+    <p><?= sprintf(__('You can find icons on one of the following sites: %s.', 'social-links-icons'), trim($sites)); ?><br/>
+        <?= __('If you are using icons that do not belong to you, do not forget to mention the authors in the legal notices.', 'social-links-icons'); ?></p>
 </article>

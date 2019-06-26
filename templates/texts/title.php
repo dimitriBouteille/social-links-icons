@@ -1,1 +1,1 @@
-<h1><?= __('Gestion des réseaux sociaux', SLI_DOMAIN); ?></h1>
+<h1><?= __('Social media management', 'social-links-icons'); ?></h1>
