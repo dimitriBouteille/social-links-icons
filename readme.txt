@@ -6,7 +6,7 @@ Requires at least: 4.2
 Tested up to: 5.2.1
 Requires PHP: 7.2
 License: GPLv3
-Stable tag: 1.0
+Stable tag: 1.1.2
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Simply customize and manage links and icons to more than 25 social networks and add your own social networks!

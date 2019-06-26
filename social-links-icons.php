@@ -3,7 +3,7 @@
 /**
  * Plugin Name:     Social Links Icons
  * Description:     Simply set up links and icons to your social networks.
- * Version:         1.0.0
+ * Version:         1.1.2
  * Author:          Dimitri BOUTEILLE
  * Author URI:      https://dimitri-bouteille.fr/
  * Text Domain:     social-links-icons
