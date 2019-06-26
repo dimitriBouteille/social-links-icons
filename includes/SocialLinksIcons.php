@@ -155,7 +155,7 @@ class SocialLinksIcons
      * @param string|null $networkSlug
      * @return bool
      */
-    public function networkExist(?string $networkSlug): bool {
+    public function networkExist(string $networkSlug): bool {
 
         if(is_null($networkSlug)) {
             return false;
@@ -203,7 +203,7 @@ class SocialLinksIcons
      * @param string $networkSlug
      * @return SLI_Social_Abstract|null
      */
-    public function getOne(string $networkSlug): ?SLI_Social_Abstract {
+    public function getOne(string $networkSlug): SLI_Social_Abstract {
 
         if($this->networkExist($networkSlug)) {
             return $this->networks[$networkSlug];

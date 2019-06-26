@@ -76,11 +76,11 @@ If you want to change the HTML code generated: [see documentation](https://githu
 = How to display social networks in a template?
 
 `
-global $socialLinksIcons;
-$networks = $socialLinksIcons->all();
-foreach($networks as $network) {
-    // Do something
-}
+    global $socialLinksIcons;
+    $networks = $socialLinksIcons->all();
+    foreach($networks as $network) {
+        // Do something
+    }
 `
 
 = How to add a social network ?

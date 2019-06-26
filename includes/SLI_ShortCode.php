@@ -139,7 +139,7 @@ class SLI_ShortCode
      * @param string|null $networks
      * @return array|null
      */
-    private function explodeListNetworks(?string $networks): ?array {
+    private function explodeListNetworks($networks) {
 
         if(is_null($networks)) {
             return null;
